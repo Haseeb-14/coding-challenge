@@ -1,97 +1,238 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native Coding Challenge
 
-# Getting Started
+A React Native application for managing store bookings with time slot selection, user authentication, and real-time notifications.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## �� Features
 
-## Step 1: Start Metro
+- **User Authentication**: Google Sign-In integration with Firebase
+- **Store Management**: Dynamic time slot generation based on store hours and overrides
+- **Booking System**: Create and manage appointments with real-time availability
+- **Timezone Support**: Handle multiple timezones for global users
+- **Push Notifications**: Local and remote notification support
+- **State Management**: Redux Toolkit with persistence
+- **Modern UI**: Clean, responsive design with custom components
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## �� Screens
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- **Login Screen**: Google Sign-In authentication
+- **Home Screen**: Store hours, time slot selection, and booking creation
+- **Bookings Screen**: View and manage existing bookings
 
-```sh
-# Using npm
+## 🛠️ Tech Stack
+
+- **React Native**: 0.79.3
+- **TypeScript**: 5.0.4
+- **State Management**: Redux Toolkit + Redux Persist
+- **Navigation**: React Navigation v7
+- **Authentication**: Firebase Auth + Google Sign-In
+- **Notifications**: React Native Push Notification
+- **Date/Time**: Moment.js with timezone support
+- **UI Components**: Custom component library
+
+## 📋 Prerequisites
+
+- **Node.js**: >=18.0.0
+- **React Native CLI**: Latest version
+- **Android Studio**: For Android development
+- **Xcode**: For iOS development (macOS only)
+- **Firebase Project**: For authentication and backend services
+
+## �� Setup Instructions
+
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd coding-challenge
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. iOS Setup (macOS only)
+```bash
+cd ios
+pod install
+cd ..
+```
+
+### 4. Environment Configuration
+Create a Firebase project and download the configuration files:
+- **Android**: Place `google-services.json` in `android/app/`
+- **iOS**: Place `GoogleService-Info.plist` in `ios/codingChallenge/`
+
+### 5. Run the Application
+
+#### Start Metro Bundler
+```bash
 npm start
-
-# OR using Yarn
+# or
 yarn start
 ```
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+#### Run on Android
+```bash
 npm run android
-
-# OR using Yarn
+# or
 yarn android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+#### Run on iOS
+```bash
 npm run ios
-
-# OR using Yarn
+# or
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## 🧪 Testing
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+```bash
+npm test
+# or
+yarn test
+```
 
-## Step 3: Modify your app
+## 📁 Project Structure
 
-Now that you have successfully run the app, let's make changes!
+## 🔐 Authentication Flow
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+1. User opens the app
+2. Firebase Auth state listener checks for existing session
+3. If no session, user sees Login screen with Google Sign-In
+4. After successful authentication, user is redirected to Home screen
+5. User data is stored in Redux store with persistence
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+## �� Booking System
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+1. **Store Hours**: Configured store operating hours
+2. **Time Slots**: Dynamic generation based on store hours
+3. **Overrides**: Special hours for holidays or events
+4. **Availability**: Real-time slot availability checking
+5. **Booking Creation**: User selects date/time and creates appointment
 
-## Congratulations! :tada:
+## 🌍 Timezone Handling
 
-You've successfully run and modified your React Native App. :partying_face:
+- App detects user's timezone automatically
+- All dates/times are displayed in user's local timezone
+- Store hours are converted from store's timezone to user's timezone
+- Moment.js with timezone-support for accurate conversions
 
-### Now what?
+## �� Push Notifications
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+- Local notifications for booking confirmations
+- Remote notifications via Firebase Cloud Messaging
+- Notification permissions handled automatically
+- Background notification support
 
-# Troubleshooting
+## 🚨 Assumptions & Limitations
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+### Assumptions
+- Users have Google accounts for authentication
+- Store operates in a single timezone
+- All users can access the same store
+- Network connectivity is available for real-time updates
 
-# Learn More
+### Limitations
+- **Authentication**: Only Google Sign-In supported (no email/password)
+- **Offline Support**: Limited offline functionality
+- **Multi-store**: Single store implementation
+- **Payment**: No payment processing integration
+- **Admin Panel**: No store management interface
+- **Data Persistence**: Limited offline data storage
 
-To learn more about React Native, take a look at the following resources:
+### Known Issues
+- iOS simulator may have notification limitations
+- Android emulator requires Google Play Services for Google Sign-In
+- Timezone changes require app restart for full effect
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## 🎯 Development Approach
+
+### Architecture Decisions
+1. **Redux Toolkit**: Chosen for predictable state management and developer experience
+2. **TypeScript**: Full type safety for better code quality and debugging
+3. **Custom Components**: Reusable UI components for consistency and maintainability
+4. **Service Layer**: Separation of concerns with dedicated service files
+5. **Hooks Pattern**: Custom hooks for business logic and state management
+
+### Code Organization
+- **Feature-based Structure**: Components organized by feature/domain
+- **Type Safety**: Comprehensive TypeScript interfaces for all data structures
+- **Error Handling**: Centralized error handling with user-friendly messages
+- **Performance**: Optimized re-renders with useCallback and useMemo
+- **Testing**: Jest setup with React Native testing utilities
+
+### State Management Strategy
+- **Normalized State**: Efficient data storage and retrieval
+- **Async Operations**: Redux Toolkit async thunks for API calls
+- **Persistence**: Redux Persist for offline data availability
+- **Optimistic Updates**: Immediate UI feedback for better UX
+
+## 🔧 Development Commands
+
+```bash
+# Linting
+npm run lint
+
+# Type checking
+npx tsc --noEmit
+
+# Metro bundler
+npm start
+
+# Clean builds
+cd android && ./gradlew clean && cd ..
+cd ios && xcodebuild clean && cd ..
+```
+
+## 📱 Platform-Specific Notes
+
+### Android
+- Minimum SDK: 21
+- Target SDK: 33
+- Google Play Services required for Google Sign-In
+
+### iOS
+- Minimum iOS: 12.0
+- Target iOS: 16.0
+- CocoaPods required for dependencies
+
+## 🤝 Contributing
+
+1. Follow the existing code style and patterns
+2. Add TypeScript types for new features
+3. Include error handling for edge cases
+4. Test on both platforms before submitting
+5. Update documentation for new features
+
+## 📄 License
+
+This project is part of a coding challenge and is not intended for production use.
+
+## 🆘 Troubleshooting
+
+### Common Issues
+
+**Metro bundler issues:**
+```bash
+npx react-native start --reset-cache
+```
+
+**iOS build failures:**
+```bash
+cd ios && pod deintegrate && pod install
+```
+
+**Android build failures:**
+```bash
+cd android && ./gradlew clean && cd ..
+```
+
+**Google Sign-In not working:**
+- Verify Firebase configuration files are in correct locations
+- Check SHA-1 fingerprint for Android
+- Ensure Google Sign-In is enabled in Firebase console
+
+For additional support, check the React Native documentation or create an issue in the repository.
