@@ -1,5 +1,9 @@
 # React Native Coding Challenge
 
+# Loom Video Link
+https://www.loom.com/share/2f632fcebae6457d8887131280bdd51f?sid=a5f135e0-5899-40f7-9294-8c079109e2e9
+
+
 A React Native application for managing store bookings with time slot selection, user authentication, and real-time notifications.
 
 ## �� Features
